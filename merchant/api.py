@@ -30,10 +30,15 @@ def env(name):
 def session():
     # Uma sessão por thread: as atualizações em massa rodam em paralelo.
     if not hasattr(_local, "session"):
-        path = Path(env("GOOGLE_APPLICATION_CREDENTIALS"))
-        if not path.is_absolute():
-            path = ROOT / path
-        creds = service_account.Credentials.from_service_account_file(path, scopes=SCOPES)
+        # Conteúdo do JSON numa variável (ambiente da nuvem) tem prioridade sobre o arquivo.
+        raw = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+        if raw:
+            creds = service_account.Credentials.from_service_account_info(json.loads(raw), scopes=SCOPES)
+        else:
+            path = Path(env("GOOGLE_APPLICATION_CREDENTIALS"))
+            if not path.is_absolute():
+                path = ROOT / path
+            creds = service_account.Credentials.from_service_account_file(path, scopes=SCOPES)
         _local.session = AuthorizedSession(creds)
     return _local.session
 

@@ -14,6 +14,9 @@ CLI em Python para consultar, analisar e atualizar produtos via **Google Merchan
 5. `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
 6. `.venv/bin/python mc.py register --email seu-email@empresa.com`
 
+**No Claude Code na nuvem**, em vez do `.env` e do arquivo, cadastre nas variáveis do ambiente
+`MERCHANT_ID`, `DATA_SOURCE` e `GOOGLE_SERVICE_ACCOUNT_JSON` (o conteúdo inteiro do JSON).
+
 Nos exemplos abaixo, `mc` = `.venv/bin/python mc.py`.
 
 ## Consulta
