@@ -1,0 +1,18 @@
+{
+ "id": "20261021-152339",
+ "label": "Desfazer lote 20261021-152058 (Rótulo 4 = teste)",
+ "created": "2026-10-21T15:23:41",
+ "undone": false,
+ "items": [
+  {
+   "product_id": "pt~BRL_25260949594~shopify_ZZ_7655801880666_42515624624218",
+   "before": {
+    "customLabel4": "teste"
+   },
+   "after": {
+    "customLabel4": null
+   }
+  }
+ ],
+ "failed": []
+}

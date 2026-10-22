@@ -1,0 +1,18 @@
+{
+ "id": "20261021-152058",
+ "label": "Rótulo 4 = teste",
+ "created": "2026-10-21T15:20:59",
+ "undone": "20261021-152339",
+ "items": [
+  {
+   "product_id": "pt~BRL_25260949594~shopify_ZZ_7655801880666_42515624624218",
+   "before": {
+    "customLabel4": null
+   },
+   "after": {
+    "customLabel4": "teste"
+   }
+  }
+ ],
+ "failed": []
+}
