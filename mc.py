@@ -72,7 +72,7 @@ def cmd_update(args):
     sup.apply({args.product_id: attrs}, f"Atualizar {args.product_id}", not args.aplicar)
 
 
-def main():
+def build_parser():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="cmd", required=True)
 
@@ -185,6 +185,11 @@ def main():
     p.add_argument("--inicio", help="AAAA-MM-DD (padrão: hoje)")
     p.add_argument("--fim", required=True, help="AAAA-MM-DD")
 
+    return parser
+
+
+def main():
+    parser = build_parser()
     args = parser.parse_args()
     if args.cmd == "promo-create" and args.modalidade != "frete" and args.valor is None:
         parser.error("--valor é obrigatório para modalidade percentual ou valor")

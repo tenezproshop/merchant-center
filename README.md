@@ -112,3 +112,49 @@ O cupom precisa existir e funcionar no checkout da Shopify; o Google analisa em 
 - Produtos novos devem entrar pela Shopify.
 - Comparação de preços, sugestões e mais vendidos dependem de volume de dados na conta.
 - Alterações levam alguns minutos para aparecer em `list`/`get`.
+
+## Conector para o Chat do claude.ai (servidor MCP)
+
+`server.py` expõe os comandos de consulta, relatórios e **simulação** de desconto como ferramentas
+do Chat. Ele nunca aplica alterações (o `undo` depende de `dados/`, que não persiste no Cloud Run);
+para aplicar, use o `mc.py --aplicar` no Claude Code.
+
+O endereço é `https://SEU-SERVICO/<MCP_TOKEN>/mcp`. **Trate essa URL como senha**: quem a tiver
+consegue ler o catálogo.
+
+### Publicar no Google Cloud Run (no Cloud Shell, dentro da pasta do repositório)
+
+```
+PROJETO=seu-projeto-gcp            # o mesmo projeto da conta de serviço
+REGIAO=southamerica-east1
+gcloud config set project $PROJETO
+gcloud services enable run.googleapis.com secretmanager.googleapis.com cloudbuild.googleapis.com
+
+# Segredos (a chave nunca vai para o repositório nem para a imagem)
+gcloud secrets create sa-json --data-file=service-account.json
+openssl rand -hex 24 | tr -d '\n' | gcloud secrets create mcp-token --data-file=-
+
+# Permite que o Cloud Run leia os segredos
+NUM=$(gcloud projects describe $PROJETO --format='value(projectNumber)')
+for s in sa-json mcp-token; do
+  gcloud secrets add-iam-policy-binding $s \
+    --member="serviceAccount:$NUM-compute@developer.gserviceaccount.com" \
+    --role=roles/secretmanager.secretAccessor
+done
+
+gcloud run deploy merchant-mcp --source . --region $REGIAO --allow-unauthenticated \
+  --timeout 300 --memory 512Mi --max-instances 2 \
+  --set-env-vars MERCHANT_ID=SEU_ID,DATA_SOURCE=SUA_FONTE \
+  --set-secrets GOOGLE_SERVICE_ACCOUNT_JSON=sa-json:latest,MCP_TOKEN=mcp-token:latest
+
+# Monta a URL do conector
+echo "$(gcloud run services describe merchant-mcp --region $REGIAO --format='value(status.url)')/$(gcloud secrets versions access latest --secret=mcp-token)/mcp"
+```
+
+### Adicionar no claude.ai
+
+Configurações → Conectores → Adicionar conector personalizado → cole a URL acima.
+Depois, numa conversa, ative o conector no menu de ferramentas.
+
+Para trocar a URL (se vazar): `openssl rand -hex 24 | tr -d '\n' | gcloud secrets versions add mcp-token --data-file=-`,
+rode o `gcloud run deploy` de novo e atualize o conector.
