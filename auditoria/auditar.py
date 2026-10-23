@@ -94,7 +94,10 @@ ESPERADA["Bandanas e Faixas de Cabelo"] = (
     [f"{VEST} > Acessórios para roupas > Acessórios para cabelo", f"{VEST} > Acessórios para roupas > Bandanas",
      "Apparel & Accessories > Clothing Accessories > Hair Accessories"],
     f"{VEST} > Acessórios para roupas > Acessórios para cabelo > Faixas de cabeça")
-ESPERADA["Munhequeiras"] = (["Apparel & Accessories > Clothing Accessories > Wristbands", f"{VEST} > Acessórios para roupas > Munhequeiras"],
+# O Google traduz "Wristbands" (ID 1893) como "Pulseiras (de relógio)" em pt-BR; sob "Acessórios para roupas" é a
+# categoria certa (relógio de verdade fica em Joias > Acessórios para relógios).
+ESPERADA["Munhequeiras"] = (["Apparel & Accessories > Clothing Accessories > Wristbands", f"{VEST} > Acessórios para roupas > Munhequeiras",
+                             f"{VEST} > Acessórios para roupas > Pulseiras (de relógio)"],
                             "a subcategoria 'Wristbands' de Vestuário e acessórios > Acessórios para roupas (nome em pt-BR ou ID numérico)")
 ESPERADA["Óculos de Sol"] = ([f"{VEST} > Acessórios para roupas > Óculos de sol"], f"{VEST} > Acessórios para roupas > Óculos de sol")
 for t in ("Raquetes de Beach Tennis", "Raquete de Beach Tennis"):
