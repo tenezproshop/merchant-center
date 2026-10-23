@@ -7,6 +7,7 @@ shopify_ZZ_7655801880666_42515624624218,Boné Nike Dri-FIT Club Unissex,OUT_OF_S
 shopify_ZZ_8053755347034_44050067161178,"Tênis On Running The Roger Pro Fire Clay Masculino - Verde, 45",IN_STOCK,1599.0,4332,55,1.27,0.0,0.0,aparece e não vende
 shopify_ZZ_7597036798042_42312052670554,"Shorts Adidas Tênis Us Open Masculino - Preto, G",IN_STOCK,349.0,196,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7582492295258_42276853776474,"Tênis Asics Gel Challenger 15 Clay/Saibro - Black/Dark Cobalt, 42",OUT_OF_STOCK,699.0,0,0,0,0,0,nunca aparece
+shopify_ZZ_9089603797082_45557794177114,"Shorts Nike Dri-FIT Totality Masculino - Cinza, G",IN_STOCK,179.0,37,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7776529088602_42907613069402,Bola De Tennis Wilson Infantil Us Open Ponto Verde Estágio 1 - C/3un,IN_STOCK,80.0,805,5,0.62,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8177147609178_44166396837978,"Camiseta Adidas Polo Estampada Tênis Masculina - Cinza, 2GG",IN_STOCK,279.99,170,1,0.59,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8177218715738_44166928302170,"Camiseta Adidas Tênis Climacool Masculina - Azul, P",IN_STOCK,179.0,111,0,0.0,0.0,0.0,"aparece, poucos cliques"
@@ -37,7 +38,6 @@ shopify_ZZ_8126479040602_43985298751578,Short Saia Fila Match - Preto,IN_STOCK,1
 shopify_ZZ_7930940555354_43428235739226,Testeira Nike Swoosh - Vermelho,IN_STOCK,99.9,204,1,0.49,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7965679747162_43516128067674,"Camiseta On Running Court - T Edit Ldn Masculina - Branca, G",IN_STOCK,549.0,141,3,2.13,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8177077813338_44166064472154,Mochila Ama Sport - Vintage Verde,IN_STOCK,699.0,1480,22,1.49,0.0,0.0,aparece e não vende
-shopify_ZZ_7959290249306_43501335380058,Tênis Asics Resolution 9 All Court Feminino - Rosa,OUT_OF_STOCK,749.9,0,0,0,0,0,nunca aparece
 shopify_ZZ_9089685225562_45557991112794,"Shorts Adidas Tennis Pro Ergo Masculino - Preto, GG",IN_STOCK,359.0,182,2,1.1,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_15404063817818_67612675178586,Regata Fila Tênis Basic Feminina - Azul Carbono,IN_STOCK,89.9,117,2,1.71,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7958584721498_43499953061978,"Saia Nike Court Dri-FIT Victory Feminina - Preta, P",IN_STOCK,399.0,139,0,0.0,0.0,0.0,"aparece, poucos cliques"
@@ -269,7 +269,7 @@ shopify_ZZ_7778983706714_42918576029786,"Shorts Adidas Run It Masculino - Preto,
 shopify_ZZ_8054112878682_43786540482650,"Saia Adidas Tênis Climacool - Preto, G",IN_STOCK,229.9,47,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7694939193434_42641574985818,"Tênis Fila Master Ace Clay/Saibro Masculino - Branco/Marinho, 43",OUT_OF_STOCK,299.0,22,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8002158461018_43624786690138,Tênis Asics Gel-Dedicate 8 Feminino Saibro/Clay - Branco,OUT_OF_STOCK,399.0,0,0,0,0,0,nunca aparece
-shopify_ZZ_7982337392730_43558587564122,"Tênis Asics Court FF 3 Masculino Clay / Saibro - Cinza/Verde, 42",IN_STOCK,1259.0,12101,45,0.37,0.0,0.0,aparece e não vende
+shopify_ZZ_7982337392730_43558587564122,"Tênis Asics Court FF 3 Masculino Clay / Saibro - Cinza/Verde, 42",IN_STOCK,1259.0,12101,46,0.38,0.0,0.0,aparece e não vende
 shopify_ZZ_8086539108442_43908585455706,"Short Nike Feminino - Rosa, G",IN_STOCK,69.0,633,2,0.32,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7987491274842_43578948386906,"Shorts Nike Pro Feminino 3 Polegadas - Cinza, G",OUT_OF_STOCK,99.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_15407741108314_67625032319066,Mochila Yonex Gearlogic 2026 Bege,IN_STOCK,1299.0,3842,76,1.98,0.0,0.0,aparece e não vende
@@ -368,6 +368,7 @@ shopify_ZZ_7866983219290_43217153556570,"Tênis On Running The Roger Pro 3 Femin
 shopify_ZZ_8174338375770_44156194422874,Caixa de Overgrip Wilson Ultra Wrap com 60 unidades - Colorido,IN_STOCK,449.1,2319,28,1.21,0.0,0.0,aparece e não vende
 shopify_ZZ_15420947759194_67690963304538,Raqueteira WIlson Advantage Preta 3 Raquetes,IN_STOCK,379.0,323,3,0.93,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7843243819098_43200788660314,"Tênis On Running The Roger Advantage Pro Clay Feminino - Lilás, 36",OUT_OF_STOCK,1199.0,389,3,0.77,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7754127048794_43857211883610,"Raquete de Beach Tennis AMA Poison Bee 2026 - Gigio Cariani, 320g / 25b",IN_STOCK,2799.0,36,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7638990094426_42473554477146,"Raquete de tenis EZONE 98 305g - 2025, L3",OUT_OF_STOCK,2699.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7953408229466_43607470145626,"Tênis Asics Gel Resolution X Saibro/Clay Preto e Verde - Masculino, 38",OUT_OF_STOCK,888.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7597280428122_42312730574938,"Camiseta Nike Court Heritage Preto, P",OUT_OF_STOCK,199.0,0,0,0,0,0,nunca aparece
@@ -632,7 +633,7 @@ shopify_ZZ_7601367580762_42328943755354,"Meia Adidas Cano Longo 3 Pares - Preto,
 shopify_ZZ_7655488815194_42515015270490,"Tenis Fila Master Ace Clay/Saibro Feminino - Branco/Marinho, 34",OUT_OF_STOCK,229.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_8002221244506_43625887891546,"Tênis Asics Gel-Challenger 14 All Court Masculino - Branco/Bordô, 42",OUT_OF_STOCK,499.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_8048634888282_43765957918810,Raquete de Tênis Inni Infantil 19 Guguinha - Azul,IN_STOCK,359.9,1705,4,0.23,0.0,0.0,"aparece, poucos cliques"
-shopify_ZZ_7645782999130_42488587288666,"Camiseta Adidas Treino Masculina, M",OUT_OF_STOCK,99.0,0,0,0,0,0,nunca aparece
+shopify_ZZ_7645782999130_42488587288666,"Camiseta Adidas Treino Masculina - Cinza, M",OUT_OF_STOCK,99.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7921772724314_43398818529370,Faixa de Cabeça Adidas de Tênis - Branco,IN_STOCK,89.9,581,5,0.86,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8128373686362_43998151671898,Polo Fila Player F-Box Basic Masculino - Branco,IN_STOCK,159.0,2538,6,0.24,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7920216277082_43394095087706,"Tênis ASICS Solution Speed ff 4 Clay/Saibro Masculino - Verde/Rosa, 42",IN_STOCK,999.9,316,2,0.63,0.0,0.0,"aparece, poucos cliques"
@@ -736,7 +737,7 @@ shopify_ZZ_7852906578010_43172258381914,Mochila Heroes Gravity Rebel Mattia Spot
 shopify_ZZ_7921411031130_43398229655642,Bola de Pickleball Penn 26 Indoor Vermelha - Pack c/ 06 Unidades,IN_STOCK,149.9,433,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_15410576097370_67640678875226,Raqueteira Yonex Gearlogic 2026 Dupla Bege - 9 Raquetes,IN_STOCK,1699.0,1215,8,0.66,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7597280428122_42312730607706,"Camiseta Nike Court Heritage Preto, M",OUT_OF_STOCK,199.0,0,0,0,0,0,nunca aparece
-shopify_ZZ_7645782999130_42488587321434,"Camiseta Adidas Treino Masculina, G",IN_STOCK,99.0,198,5,2.53,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7645782999130_42488587321434,"Camiseta Adidas Treino Masculina - Cinza, G",IN_STOCK,99.0,198,5,2.53,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7825660837978_43063234527322,Óculos De Sol Mormaii Smash 3 - Lilás,IN_STOCK,449.0,1746,5,0.29,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7597036798042_42312052703322,"Shorts Adidas Tênis Us Open Masculino - Preto, GG",IN_STOCK,349.0,139,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7597086408794_42312144060506,"Saia Plissada Adidas Tênis - Branco, P",OUT_OF_STOCK,299.0,597,1,0.17,0.0,0.0,"aparece, poucos cliques"
@@ -750,7 +751,7 @@ shopify_ZZ_7589992464474_42291665371226,"Tênis Asics Gel Dedicate 8 All Court F
 shopify_ZZ_7851822579802_43169201160282,"Tênis Asics Gel-Backhand Masculino All Court - Steel Blue/Hazard Green, 43",OUT_OF_STOCK,289.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7962222690394_43506142183514,"Shorts Nike Court Dri-FIT Victory 7 Masculino - Preto, P",IN_STOCK,349.9,119,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8053734867034_43784906932314,"Camisa Adidas Polo Tênis Climacool Masculina - Azul, GG",OUT_OF_STOCK,199.9,0,0,0,0,0,nunca aparece
-shopify_ZZ_7949536362586_43481136398426,"Camisa Masculina Nike Seleção Brasil 2026/27 CBF Amarela, EGG",OUT_OF_STOCK,349.0,15356,218,1.42,0.0,0.0,aparece e não vende
+shopify_ZZ_7949536362586_43481136398426,"Camisa Masculina Nike Seleção Brasil 2026/27 CBF Amarela, EGG",IN_STOCK,349.0,15356,218,1.42,0.0,0.0,aparece e não vende
 shopify_ZZ_7851811569754_43169164132442,"Tênis Asics Gel Backhand Masculino All Court- Preto, 44",OUT_OF_STOCK,299.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7593187639386_42298815381594,"Tênis Yonex Power Sonicage Clay / Saibro Lilás - Feminino, 36,5",OUT_OF_STOCK,999.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7953357373530_43488617562202,"Tênis Nike Zoom Gp Challenge Pro Saibro/Clay - Masculino, 39",IN_STOCK,549.0,1709,37,2.17,0.0,0.0,aparece e não vende
@@ -839,7 +840,7 @@ shopify_ZZ_7600732864602_42327958945882,"Camisa Polo On Running Courtside Preto,
 shopify_ZZ_8083215056986_43900745875546,Raquete de Tênis Wilson Defyer 100L - 285g - Vermelha,IN_STOCK,2069.1,21987,149,0.68,0.0,0.0,aparece e não vende
 shopify_ZZ_7841778139226_43126933717082,"Meia On Running 3 Pares - Azul, 41/44",OUT_OF_STOCK,149.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7681090584666_42591017992282,"Saia Nike Court Dri-Fit Feminina-Preto, M",OUT_OF_STOCK,349.0,0,0,0,0,0,nunca aparece
-shopify_ZZ_7645782999130_44166754500698,"Camiseta Adidas Treino Masculina, 2GG",IN_STOCK,99.0,89,3,3.37,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7645782999130_44166754500698,"Camiseta Adidas Treino Masculina - Cinza, 2GG",IN_STOCK,99.0,89,3,3.37,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8047753166938_43764333707354,Raqueteira Wilson Heritage 12PK - Off White/Marrom,IN_STOCK,1399.0,2455,14,0.57,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7696064249946_42644516241498,"Tênis Gel-Dedicate 8 Clay - Branco/Verde, 40",OUT_OF_STOCK,449.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_8092843278426_45559827628122,"Short Saia Fila Tênis Básica - Bordô, M",IN_STOCK,179.0,484,18,3.72,0.0,0.0,"aparece, poucos cliques"
@@ -878,9 +879,10 @@ shopify_ZZ_7603740115034_42335171706970,"Tênis Fila Master Ace Clay/Saibro Femi
 shopify_ZZ_15407728885850_67625013837914,Mochila Yonex Gearlogic 2026 Preta,IN_STOCK,1299.0,1202,5,0.42,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7953424547930_43579618885722,"Tênis Asics Gel Resolution X Saibro/Clay Rosa - Masculino, 39",OUT_OF_STOCK,719.1,0,0,0,0,0,nunca aparece
 shopify_ZZ_7844393320538_44011611947098,"Raquete de Beach Tennis AMA New Kronos 2026 6th Generation, 318g / 25.6b",OUT_OF_STOCK,2799.0,0,0,0,0,0,nunca aparece
+shopify_ZZ_9089603797082_45557794209882,"Shorts Nike Dri-FIT Totality Masculino - Cinza, GG",IN_STOCK,179.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7689591685210_42614923460698,Kit Faixa de Cabeça Fila Fit 3 unidades,IN_STOCK,99.0,119,1,0.84,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_15404054741082_67612638249050,Camiseta Fila Tênis Basic Feminina - Azul Marinho,IN_STOCK,99.0,42,0,0.0,0.0,0.0,"aparece, poucos cliques"
-shopify_ZZ_7920216277082_43394095054938,"Tênis ASICS Solution Speed ff 4 Clay/Saibro Masculino - Verde/Rosa, 41",IN_STOCK,999.9,639,5,0.78,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7920216277082_43394095054938,"Tênis ASICS Solution Speed ff 4 Clay/Saibro Masculino - Verde/Rosa, 41",IN_STOCK,999.9,638,5,0.78,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8083086770266_43900526297178,"Tênis On Running The Roger Advantage Feminino - White / Flurry, 37",IN_STOCK,999.0,199,1,0.5,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8092710830170_45559846862938,"Short Saia Adidas Estampada - Rosa, P",IN_STOCK,199.0,336,2,0.6,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7702470557786_42668580700250,"Tênis Yonex Eclipsion5 Clay / Saibro Masculino - Branco/Laranja, 41",OUT_OF_STOCK,1399.0,0,0,0,0,0,nunca aparece
@@ -893,6 +895,7 @@ shopify_ZZ_7690478223450_42620034941018,Munhequeira Fila G Par 4X4 Amarela,IN_ST
 shopify_ZZ_7989268938842_43584469467226,"Regata Nike Dri-Fit Feminina - Bege, G",IN_STOCK,99.9,570,8,1.4,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8054074900570_43864777556058,"Saia Adidas Plissada Tênis Climacool INFANTIL- Rosa, G",OUT_OF_STOCK,299.0,73,3,4.11,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8054057926746_43786194583642,"Vestido Adidas Tênis Climacool - Rosa, M",IN_STOCK,349.9,199,0,0.0,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7754127048794_43857206837338,"Raquete de Beach Tennis AMA Poison Bee 2026 - Gigio Cariani, 319g / 25b",OUT_OF_STOCK,2799.0,19385,117,0.6,0.0,0.0,aparece e não vende
 shopify_ZZ_15399308427354_67595949801562,"Camiseta Fila Tênis Basic Feminina - Vermelho, P",IN_STOCK,89.9,0,0,0,0,0,nunca aparece
 shopify_ZZ_7952787865690_43487606964314,Raqueteira Wilson Blade V10 X9 - Verde Esmeralda,IN_STOCK,1349.0,4164,47,1.13,0.0,0.0,aparece e não vende
 shopify_ZZ_7925001486426_43406045184090,"Camiseta On Running Court-T Masculina - Preta, GG",OUT_OF_STOCK,449.0,0,0,0,0,0,nunca aparece
@@ -932,11 +935,11 @@ shopify_ZZ_9089635811418_45557889826906,"Shorts Dri-FIT Nike Flex 7'' Masculino 
 shopify_ZZ_8152366907482_44091153186906,"Short On Running Court Shorts 2-in-1 Feminino - Roxa, M",IN_STOCK,449.0,622,8,1.29,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8002319777882_43625219555418,"Tênis Adidas Courtjam Bounce All Court Masculino - Preto, 40",OUT_OF_STOCK,359.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7912384757850_43365741232218,"Shorts Adidas Tennis Climacool Match 2 Em 1 Feminino - Laranja, P",IN_STOCK,299.0,80,1,1.25,0.0,0.0,"aparece, poucos cliques"
-shopify_ZZ_8082865684570_43899656437850,"Tênis On Running THE ROGER Clubhouse Masculino - Branco e Verde, 41",IN_STOCK,1099.0,5083,4,0.08,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_8082865684570_43899656437850,"Tênis On Running THE ROGER Clubhouse Masculino - Branco e Verde, 41",IN_STOCK,1099.0,5082,4,0.08,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7962517536858_43507473186906,"Vestido Adidas Tennis Climacool Pro - Azul Marinho, M",OUT_OF_STOCK,629.9,0,0,0,0,0,nunca aparece
 shopify_ZZ_7763500892250_42865663606874,"Raquete de Tênis Babolat Pure Aero 300g - 2026, L2",IN_STOCK,2299.0,5652,15,0.27,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7661423165530_42528331006042,"Camiseta Adidas Básica Masculina - Preto, G",IN_STOCK,99.0,294,0,0.0,0.0,0.0,"aparece, poucos cliques"
-shopify_ZZ_7927931797594_43414730571866,"Tênis On Running The Roger Pro Fire Clay João Fonseca Roland Garros - Roxo/Rosa, 38",OUT_OF_STOCK,1599.0,0,0,0,0,0,nunca aparece
+shopify_ZZ_7927931797594_43414730571866,"Tênis On Running The Roger Pro Fire Clay João Fonseca Roland Garros - Roxo/Rosa, 38",IN_STOCK,1599.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7987491274842_43578948419674,"Shorts Nike Pro Feminino 3 Polegadas - Cinza, GG",IN_STOCK,99.0,226,3,1.33,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7919736782938_43393236729946,"Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa, 35",IN_STOCK,629.1,1326,12,0.9,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7674494386266_42571425579098,"Saia Adidas Com Bolso Tennis Climacool - Preta, M",OUT_OF_STOCK,199.0,66,1,1.52,0.0,0.0,"aparece, poucos cliques"
@@ -1020,7 +1023,7 @@ shopify_ZZ_7960670928986_43503091515482,Overgrip Wilson Pro - Branco,IN_STOCK,89
 shopify_ZZ_7580038266970_42270712103002,"Raquete de Tênis Babolat Pure Drive 100 300g - 2025, L3",IN_STOCK,2199.0,3331,8,0.24,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7896865013850_43312997531738,"Tênis On Running The Roger Pro 3 Clay João Fonseca Feminino - Preto/Rosa, 36",OUT_OF_STOCK,1599.0,31,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8054112878682_43786540449882,"Saia Adidas Tênis Climacool - Preto, M",IN_STOCK,229.9,59,1,1.69,0.0,0.0,"aparece, poucos cliques"
-shopify_ZZ_7645782999130_42488587354202,"Camiseta Adidas Treino Masculina, GG",IN_STOCK,99.0,150,1,0.67,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7645782999130_42488587354202,"Camiseta Adidas Treino Masculina - Cinza, GG",IN_STOCK,99.0,150,1,0.67,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7805426565210_43002800799834,"Camiseta Lacoste Sport Ultra Dry Masculina - Branco, G",IN_STOCK,429.0,73,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8053755347034_44050067062874,"Tênis On Running The Roger Pro Fire Clay Masculino - Verde, 41",OUT_OF_STOCK,1599.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_7694939193434_42641575182426,"Tênis Fila Master Ace Clay/Saibro Masculino - Branco/Marinho, 38",OUT_OF_STOCK,299.0,0,0,0,0,0,nunca aparece
@@ -1159,6 +1162,7 @@ shopify_ZZ_8144296214618_44051498991706,"Tênis On Running The Roger Pro Fire Cl
 shopify_ZZ_7931016708186_43428372611162,"Raquete de Beach Tennis Shark EPIC - 4 - Rosa e Laranja, 324,6g/26,8b",OUT_OF_STOCK,699.0,0,0,0,0,0,nunca aparece
 shopify_ZZ_15404047532122_67612600598618,"Bermuda Fila Tênis Box II 8,5 Masculina - Branco, GG",IN_STOCK,149.9,31,2,6.45,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8083086770266_44050071847002,"Tênis On Running The Roger Advantage Feminino - White / Flurry, 35",IN_STOCK,999.0,636,2,0.31,0.0,0.0,"aparece, poucos cliques"
+shopify_ZZ_7754127048794_43172049584218,"Raquete de Beach Tennis AMA Poison Bee 2026 - Gigio Cariani, 328g/26.2b",OUT_OF_STOCK,2799.0,114,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8046093336666_43758487437402,Bola de Tênis Babolat Jumbo Para Autógrafo,IN_STOCK,159.9,963,5,0.52,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_7843243819098_43200788725850,"Tênis On Running The Roger Advantage Pro Clay Feminino - Lilás, 38",OUT_OF_STOCK,1199.0,29,0,0.0,0.0,0.0,"aparece, poucos cliques"
 shopify_ZZ_8006455132250_45556592705626,"Raquete de Beach Tennis AMA Athena Boreal Limited - 2026, 315g / 24.9b",OUT_OF_STOCK,2799.0,3386,44,1.3,0.0,0.0,aparece e não vende
