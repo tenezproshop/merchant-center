@@ -1,130 +1,160 @@
-# Auditoria do catálogo – Google Merchant Center (Tenez) · 4ª rodada (completa)
+# Auditoria do catálogo – Google Merchant Center (Tenez) · 5ª rodada (completa)
 
-**Data:** 23/10/2026, 14h30 (horário de Brasília) · **Modo:** somente leitura (nada foi alterado no Google, na Shopify ou em `dados/`)
-**Comparada com:** 3ª rodada (11h30 de hoje), 2ª rodada (cedo) e 1ª rodada (22/10). As versões anteriores deste arquivo estão no histórico da branch.
+**Data:** 26/10/2026, 14h56 (horário de Brasília) · **Modo:** somente leitura (nada foi alterado no Google, na Shopify ou em `dados/`)
+**Comparada com:** a 4ª rodada (23/10, 14h30). As versões anteriores deste arquivo estão no histórico da branch.
 
 ---
 
-## 0. O que mudou
+## 0. O que mudou desde 23/10
 
-| | 22/10 | 23/10 cedo | 23/10 11h30 | **23/10 14h30** |
-|---|---:|---:|---:|---:|
-| Produtos no catálogo | 1.344 | 1.336 | 1.328 | **1.332** |
-| Problemas (total) | 5.169 | 5.136 | 3.775 | **2.337** |
-| Crítico | 21 | 22 | 20 | 20 |
-| Alto | 2.611 | 2.594 | 1.295 | **885** |
-| Médio | 914 | 903 | 852 | 849 |
-| Baixo | 1.623 | 1.617 | 1.608 | **583** |
-| Produtos com status ALTO | 1.147 | 1.140 | 778 | **647** |
-| Produtos sem nenhum problema | 7 | 7 | 32 | **243** |
-| Reprovados (algum destino) | 16 | 17 | 15 | 15 |
-| Reprovados em Shopping / anúncios grátis | 12 | 13 | 11 | 11 |
+### 0.1 O Google agora recebe os produtos de duas fontes
 
-**Desde as 11h30, o que foi resolvido:**
+Há uma **fonte nova na conta: "Shopify App API"** (o app oficial da Shopify). **1.081 dos 1.334 produtos agora vêm dela** e só **253 continuam vindo do Simprosys**. Nas duas rodadas anteriores, os 1.332 produtos vinham do Simprosys. Nas ofertas que passaram para a fonte nova, mudaram, em ordem de volume:
 
-| Problema | 11h30 | Agora |
+| Campo | Produtos que mudaram | O que mudou |
+|---|---:|---|
+| Link, frete, quantidade, descrição, categoria | cerca de 1.050 a 1.080 | O link passa a usar `utm_source=google&utm_medium=product_sync` (antes vinha do Simprosys); a descrição vem em texto simples, sem HTML; a categoria vem como **código numérico** (187, 5322, 3906…); o frete vem como serviço padrão `SHIPPING` |
+| Título | 823 | Sem a vírgula antes do tamanho: "Branco, M" virou "Branco M" |
+| Marca | 141 | Passou a ser enviada em produtos que antes não tinham (AMA, Nike, On Running) |
+| Cor | 626 | Cores informadas de outro jeito ("branco e azul" virou "Branco"; produtos sem cor passaram a ter) |
+| Gênero / faixa etária | 190 / 163 | Passaram a seguir a categoria da Shopify (masculino, feminino, infantil) |
+| Material | 75 | Novo atributo enviado |
+| Condição, `identifierExists`, `itemGroupId` do Simprosys | cerca de 970 / 1.070 / 930 | Deixaram de ser enviados no formato antigo. O `itemGroupId` agora vem como `shopify_ZZ_<id do produto>` |
+
+**Resultado nos problemas:** a fonte nova resolveu parte do que estava aberto, mas trouxe efeitos novos (§0.3 e §0.4).
+
+### 0.2 Aviso novo de "anúncios locais grátis"
+
+O Google passou a avaliar um **destino novo, "FREE_LOCAL_LISTINGS" (anúncios locais grátis)**. **1.081 produtos estão reprovados nele** por `local_stores_lack_inventory` ("Missing local inventory data"). Isso não afeta Shopping nem anúncios grátis online: os mesmos produtos continuam aprovados nesses destinos. Como a loja vende só online, o aviso vai continuar enquanto o programa estiver ligado. Desative o programa de anúncios locais gratuitos no Merchant Center ou ignore. Registrei como **baixo** e ele **não entra** nas contagens de problemas e de reprovados abaixo (mas continua no `irregularidades.csv`).
+
+### 0.3 O que melhorou
+
+| Problema | 23/10 | Agora |
 |---|---:|---:|
-| **Categoria genérica demais** (só "Vestuário e acessórios") | 279 | **0** |
-| **Tênis (calçado) classificado como o esporte "Tênis"** | 92 | **0** |
-| **Categoria incompatível com o tipo** | 37 | **0** |
-| **Sem categoria** | 1 | **0** |
-| **Peso de envio vazio** | 1.024 | **0** (o peso foi preenchido em 1.332 produtos) |
-| Vestuário/calçado sem tamanho | 18 | 7 |
-| Variantes de cores diferentes com a mesma foto | 33 | 23 |
+| Sem marca | 164 | **28** |
+| `identifierExists=false` em produto de marca | 152 | **27** |
+| Vestuário/calçado sem cor | 418 | **211** |
+| Sem imagens adicionais | 502 | **116** |
+| Categoria em código numérico sem conferência | 25 | 7 (e 20 estão agora marcadas como incompatíveis, veja §3) |
+| GTIN inválido | 1 | **0** |
+| Títulos idênticos entre produtos diferentes | 10 | 2 |
+| Atributo diferente entre variantes do mesmo grupo | 46 | 17 |
+| Reprovados por "página indisponível" | 10 | **9** |
 
-Desde a 1ª rodada: gênero errado foi de 725 para 3 e faixa etária infantil errada, de 50 para 4. Os 40 produtos com categoria em inglês ou polonês foram para 0.
+### 0.4 O que piorou ou ficou novo com a fonte nova
 
-**O sync de categorias terminou às 11h41** (1.303 produtos reprocessados). Hoje, **todos os produtos com tipo conhecido estão na categoria certa**, exceto 25 variantes com código numérico antigo (§3).
+| Problema | Antes | Agora | Observação |
+|---|---:|---:|---|
+| **Sem GTIN e sem MPN** (marca presente, sem identificador) | 0 | **155** | O Simprosys enviava `identifierExists=false` ou MPN; a fonte nova não envia. O Google ainda não acusou, por isso classifiquei como médio |
+| **Preço promocional sem data de fim** | 27 | **202** | O Simprosys criava uma janela automática de 30 dias; a fonte nova não envia data |
+| **Gênero contradizendo o título** (feminino enviado como masculino) | 3 | **14** | Na Shopify o gênero está certo; o app enviou masculino. Camiseta Adidas Tênis Climacool Feminina Branca (3 tamanhos), Tênis On Roger Advance Pro Feminino (2) e Tênis Yonex Power Sonicage Lilás Feminino (9) |
+| **Sem gênero** | 0 | 5 | Bonés On Running Lightweight e Testeira Lacoste |
+| **Sem faixa etária** | 0 | 30 | Bonés On Running Lightweight, meias Adidas e outros |
+| **Sem tamanho** | 7 | 19 | Camisetas Lacoste, meias Adidas/Fila/On e Saia Adidas Plissada Infantil |
+| **Categoria sem valor** | 0 | 3 | Mochilas e raqueteiras AMA Supreme (produtos novos) |
+| **Condição não enviada** | 0 | 976 | O Google assume "novo". É opcional; classifiquei como baixo |
+| **Peso de envio vazio** | 0 | 7 | Produtos novos AMA Supreme e Toalha Fila |
 
-**Mudanças no catálogo desde as 11h30:**
-- **Voltou ao feed (publicada de novo na Shopify):** Raquete AMA Poison Bee 2026, em 3 pesos. Está **ativa e com estoque**. A variante 320g/25.2b está em estoque (1 unidade) e **continua reprovada por "página indisponível"** (§2).
-- **Novos:** 2 variantes de Shorts Nike Dri-FIT Totality Masculino Cinza (G e GG). Estão como **unissex**, enquanto as outras variantes do mesmo shorts estão como masculino.
-- **Saiu:** Tênis Asics Resolution 9 All Court Feminino Rosa (não verifiquei o motivo na Shopify).
-- **Deixou de estar reprovado:** Tênis Asics Gel Resolution X Rosa 40 (53 cliques/mês).
+### 0.5 Mudanças no catálogo
+- **Saíram do feed:** Vestido Tênis On Running Court Dress Split Roxo (P, PP, M), Boné Unissex On Running João Fonseca Branco, Saia Nike Court Dri-Fit Feminina Vermelha (rascunho na Shopify) e Meias Adidas Amortecimento Bordô.
+- **Entraram:** Raquete Heroes Starlight Ruby (324g/25b), Mochilas e Raqueteiras Beach Tennis AMA Supreme (6 ofertas: Kronos, Azul e Caramelo, Bege e Marrom) e Toalha Fila Quick Dry Azul Marinho.
+- **Não há mais produto em rascunho da Shopify no Google.** Conferi na Shopify: 224 produtos estão em rascunho e nenhum deles aparece no feed.
 
 ---
 
 ## 1. Totais
 
-- **Produtos baixados:** 1.332, conferidos com `mc.py health` (1.332) e com o `product_view` do relatório (1.332).
-- **Estoque:** 828 em estoque e 504 fora de estoque.
-- **Gênero:** 493 masculino, 428 feminino e 411 unissex. **Faixa etária:** 46 infantil e 1.286 adulto.
-- **Desempenho (23/09 a 22/10):** 1.341.360 impressões e 12.079 cliques, com só **0,15 conversão** no mês, ou seja, nenhuma venda registrada. Ligue o acompanhamento de conversões.
-- **Preço de referência:** 646 produtos.
+| | 22/10 | 23/10 cedo | 23/10 11h30 | 23/10 14h30 | **26/10 14h56** |
+|---|---:|---:|---:|---:|---:|
+| Produtos no catálogo | 1.344 | 1.336 | 1.328 | 1.332 | **1.334** |
+| Problemas (total)* | 5.169 | 5.136 | 3.775 | 2.337 | **1.824** |
+| Crítico | 21 | 22 | 20 | 20 | **19** |
+| Alto | 2.611 | 2.594 | 1.295 | 885 | **499** |
+| Médio | 914 | 903 | 852 | 849 | **558** |
+| Baixo | 1.623 | 1.617 | 1.608 | 583 | **748** |
+| Produtos com status Alto | 1.147 | 1.140 | 778 | 647 | **437** |
+| Produtos sem nenhum problema | 7 | 7 | 32 | 243 | **351** |
+| Reprovados (destinos online) | 16 | 17 | 15 | 15 | **14** |
+| Reprovados em Shopping e anúncios grátis | 12 | 13 | 11 | 11 | **10** |
+
+\* Sem os dois avisos informativos novos: estoque local (1.081) e condição não enviada (976), que somam **2.057** ocorrências e estão no `irregularidades.csv` como baixo. Contando tudo, são 3.881 ocorrências.
+
+- **Produtos baixados:** 1.334, conferidos com `mc.py health` (1.334) e com o `product_view` do relatório (1.334).
+- **Estoque:** 829 em estoque e 505 fora de estoque.
+- **Fonte dos dados:** Shopify App API 1.081 · Simprosys 253.
+- **Gênero:** 521 masculino, 410 feminino, 241 unissex e **162 sem gênero**. **Faixa etária:** 44 infantil, 1.135 adulto e **155 sem faixa etária**. Nessa contagem, sem valor aparece quando a fonte nova não envia o atributo.
+- **Desempenho (26/09 a 25/10):** 1.254.432 impressões e 11.229 cliques, com só **0,15 conversão** no mês, ou seja, nenhuma venda registrada. Ligue o acompanhamento de conversões.
+- **Preço de referência:** 640 produtos.
 - **Problemas da conta:** nenhum. **Custom labels:** nenhum produto tem.
-- **Promoção do Google 84205 "10% off on all products":** continua **REPROVADA**, porque o desconto não é aplicado no checkout.
-- **Peso de envio:** preenchido em todos os 1.332. Os valores mais comuns são 300 g (694 produtos), 800 g (331) e 400 g (220). Parecem pesos padrão por tipo de produto; vale conferir se refletem o peso real, principalmente nas raquetes e raqueteiras.
+- **Promoção do Google 84205 "10% off on all products":** continua **REPROVADA** (o desconto não é aplicado no checkout).
+- **Peso de envio:** preenchido em 1.327 dos 1.334 produtos.
 
-| Gravidade | Ocorrências |
-|---|---:|
-| Crítico | 20 |
-| Alto | 885 |
-| Médio | 849 |
-| Baixo | 583 |
-| **Total** | **2.337** |
-
-**Status geral por produto:** CRÍTICO 16 · ALTO 647 · MÉDIO 282 · BAIXO 144 · OK 243.
-**Origem:** Google 104, pente fino 2.233. **Onde corrigir:** Shopify 2.268, Merchant Center 35, Simprosys/app 34.
+**Status geral por produto:** CRÍTICO 15 · ALTO 437 · MÉDIO 292 · BAIXO 239 · OK 351.
+**Origem:** Google 1.183 (1.081 são o aviso de estoque local), pente fino 2.698. **Onde corrigir:** Shopify 1.531, Merchant Center 1.118 (1.081 do estoque local) e Simprosys ou app 1.232.
 
 ---
 
 ## 2. O que o Google aponta
 
-São 99 produtos com algum problema: 288 ocorrências por destino, sendo 96 DISAPPROVED e 192 NOT_IMPACTED.
+São 97 produtos com algum problema nos destinos online (eram 99). **Reprovados nos destinos online: 14 produtos, dos quais 10 também em Shopping e anúncios grátis.**
 
-### 2.1 Reprovados: 15 produtos (11 também em Shopping e anúncios grátis)
+### 2.1 Reprovados
 
 | Código | Produtos | Situação |
 |---|---:|---|
-| `landing_page_error` – página indisponível | **10** | Todos estão **ACTIVE e publicados** na Shopify (conferido às 14h30). A página existe: faça o teste ao vivo na Inspeção de URL do Search Console e peça nova análise no Merchant Center. |
-| Política de conteúdo adulto | 4 (Sunga Nike Outline Swoosh, sem estoque) | Só em Display, Demand Gen e Vídeo. Trocar a foto por uma sem modelo, ou aceitar a restrição. |
-| `image_too_small` | 1 (Top Nike Pro Dri-Fit Swoosh Feminino – Preto) | Trocar a imagem principal. |
+| `landing_page_error`: página indisponível | **9** | Todos estão **ACTIVE e publicados** na Shopify (conferido hoje). A página existe: fazer o teste ao vivo na Inspeção de URL do Search Console e pedir nova análise no Merchant Center. |
+| Conteúdo adulto restrito e interesses sexuais | 4 (Sunga Nike Outline Swoosh, sem estoque) | Só em Display, Demand Gen e Vídeo. Trocar a foto por uma sem modelo, ou aceitar a restrição. |
+| `image_too_small` | 1 (Top Nike Pro Dri-Fit Swoosh Feminino - Preto) | Trocar a imagem principal. |
 
-Os 10 com página indisponível:
-- Wilson Ultra 100 V5 RG (110 cliques/mês)
-- Óculos Mormaii Smash (52)
+Os 9 com página indisponível:
+- Wilson Ultra 100 V5 RG (96 cliques/mês)
+- Óculos Mormaii Smash (45)
 - Wilson Heritage 12PK
-- Top Nike Pro Swoosh Vermelho
 - Bola Wilson RG 3 tubos
-- Shorts Nike Pro 3" Vermelho
-- Shorts Adidas Essential
 - Raqueteira Yonex Gearlogic Bege
+- Top Nike Pro Swoosh Vermelho
+- Shorts Adidas Essential
 - Regata Nike Court Vermelha
-- **Raquete AMA Poison Bee 2026, variante 320g/25.2b.** O produto foi republicado hoje na Shopify; o status do Google deve se atualizar sozinho em alguns dias, mas vale pedir nova análise.
+- Raquete AMA Poison Bee 2026 (variante 320g/25.2b)
+
+O Shorts Nike Pro Feminino 3" Vermelho deixou de estar reprovado desde a rodada anterior.
 
 ### 2.2 Avisos e pendentes
-- **80 produtos com "imagem pequena para a próxima exigência"**, que vai virar reprovação.
+- **79 produtos com "imagem pequena para a próxima exigência"** (antes 80).
 - **4 títulos em maiúsculas** (Head Speed MP).
 - **1 pendente** em Demand Gen (Yonex Percept 100, imagem em análise).
+- **1.081 produtos reprovados só nos anúncios locais grátis** (§0.2).
 
 ---
 
-## 3. Os 10 problemas mais frequentes (agora)
+## 3. Os 10 problemas mais frequentes (sem os avisos informativos)
 
-| # | Problema | Produtos | Gravidade | Onde corrigir |
+| # | Problema | Ofertas | Gravidade | Onde corrigir |
 |---|---|---:|---|---|
-| 1 | Fora de estoque e ainda no feed (60 deles tiveram 1.325 cliques em 30 dias) | 504 | baixo / médio | Shopify |
-| 2 | Sem imagens adicionais | 502 | médio | Shopify |
-| 3 | **Vestuário/calçado sem cor** (obrigatória no Brasil) | 418 | alto | Shopify + app |
-| 4 | **Sem marca** | 164 | alto | Shopify + app |
-| 5 | **`identifierExists=false` em produto de marca** | 152 | alto | Shopify + app |
-| 6 | Imagem pequena para a próxima exigência (Google) | 80 | alto | Shopify |
-| 7 | Descrição curta | 54 | médio | Shopify |
-| 8 | Atributo diferente entre variantes do mesmo grupo | 46 | médio | Shopify |
-| 9 | Título curto | 43 | médio | Shopify |
-| 10 | GTIN repetido em outra oferta | 33 | alto | Shopify |
+| 1 | Sem data de fim no preço promocional | 202 | baixo | Shopify + app |
+| 2 | Sem GTIN e sem MPN (marca presente) | 155 | médio | Shopify + app |
+| 3 | Sem imagens adicionais | 116 | médio | Shopify |
+| 4 | Fora de estoque e ainda no feed (61 deles tiveram 1.175 cliques em 30 dias) | 505 | baixo / médio | Shopify |
+| 5 | **Vestuário/calçado sem cor** | 211 | alto | Shopify + app |
+| 6 | Imagem pequena para a próxima exigência (Google) | 79 | alto | Shopify |
+| 7 | Descrição curta | 56 | médio | Shopify |
+| 8 | GTIN repetido em outra oferta | 58 | alto | Shopify |
+| 9 | Título curto | 45 | médio | Shopify |
+| 10 | Sem faixa etária | 30 | alto | Shopify + app |
 
-**Demais achados:**
-- **25 variantes de 13 produtos com a categoria antiga em forma de código.** O campo na Shopify está certo, mas o app mandou o valor antigo. Os tênis Asics Gel Resolution, Nike Vapor Lite 3 e On The Roger Advantage Pro continuam como "1065", e a Raquete Mormaii Vitória Marchezini (o produto com mais cliques da loja) como "3906" em vez de 499850. Provavelmente o app guarda uma categoria definida manualmente nesses produtos: abra um deles no app, limpe ou corrija a categoria e sincronize.
-- **Identificadores:** 33 produtos com GTIN repetido (58 ofertas), 1 GTIN inválido (Overgrip Head Prime Tour – Preto) e 2 marcas trocadas (Meia Nike = Yonex; Squash Dunlop = Tecnifibre).
-- **Variantes:** 7 meias sem tamanho (os números como "38-40" estão só no título; preencha a opção "Tamanho"), 8 variantes com preço destoando das demais e 23 grupos com cores diferentes usando a mesma foto.
-- **Textos:** 10 títulos idênticos, 6 descrições iguais ao título e 31 marcas fora do padrão de escrita.
-- **Cor incompleta:** 30 produtos têm só uma cor no feed, mas o título cita duas ("Branco/Marinho").
-- **Promoções e desempenho:** 27 promoções sem data de fim, 25 produtos em estoque sem nenhuma impressão em 30 dias e 14 preços ≥ 60% acima da referência do mercado.
-- **Gênero e faixa etária (7 produtos restantes):**
-  - **Shorts Nike Dri-FIT Totality Masculino Cinza G e GG** estão como unissex, e o Tênis Nike Legend Essential 2 Masculino também.
-  - **4 produtos infantis estão como adulto:** Bola Wilson US Open Infantil Estágio 1, Wilson US Open Junior Stage 3, Bola Babolat Red Felt Infantil e Raqueteira Babolat Carlitos Junior.
-- **Tipo errado na Shopify:** a Bola DHS D40+ é de pingue-pongue, mas o tipo dela é "Bolas de Tênis – Pack Econômico".
+**Outros achados relevantes:**
+- **Sem marca (28) e `identifierExists=false` em produto de marca (27):** todos são ofertas que ainda vêm do Simprosys e não migraram para a fonte nova.
+- **Gênero errado, feminino como masculino:** 14 ofertas (§0.4), todas da fonte nova. Conferi dois desses produtos na Shopify (Tênis Yonex Power Sonicage Lilás Feminino e Camiseta Adidas Tênis Climacool Feminina Branca) e o "Gênero-alvo" está **Feminino**, então o erro está no app que envia. A camiseta Adidas tem as tags Feminino e Masculino ao mesmo tempo, o que pode confundir o app; no Yonex só há a tag Feminino, então a causa não é clara. Vale conferir a regra de gênero do app.
+- **Categoria incompatível (20 ofertas):** 16 variantes ainda com o código **1065** (esporte tênis em vez de sapato): Tênis Asics Gel Resolution X e Resolution x Feminino, Nike Vapor Lite 3 Feminino e On Roger Advantage Pro Feminino, mais a Raqueteira Wilson Pro Staff Classic 12R. Além delas, 2 ofertas da Raquete Mormaii Vitória Marchezini (**3906**, deveria ser 499850), a Raquete Heroes Starlight Ruby (**499848**, que é de pickleball, deveria ser 499850) e a Raqueteira Wilson Blade V10 X9 (**6551**, deveria ser 3638).
+- **Sem categoria do Google:** 3 ofertas (AMA Supreme). **Sem tipo de produto:** 1.
+- **Identificadores:** 58 ofertas com GTIN repetido (a mesma quantidade das rodadas anteriores) e 2 marcas trocadas (Meia Nike = Yonex; Squash Dunlop = Tecnifibre).
+- **Variantes:** 19 sem tamanho, 8 com preço destoando das demais e 15 grupos com cores diferentes usando a mesma foto.
+- **Textos:** 2 títulos idênticos, 6 descrições iguais ao título e 32 marcas fora do padrão de escrita.
+- **Desempenho e preço:** 28 produtos em estoque e sem nenhuma impressão em 30 dias; 13 com preço ≥ 60% acima da referência do mercado.
+- **Tamanho em formato de código:** 1 oferta com tamanho "tamanho-unico".
+- **Códigos de categoria:** conferi os códigos numéricos pelas categorias da Shopify (187 = Sapatos, 5322 = Roupas esportivas, 3906 = raquetes de tênis, 499850 = raquetes de beach tennis/padel, 3638 = raqueteiras, 3113 = bolas de tênis etc.). Os códigos 4077 e 4126 (Toalha Fila) não puderam ser conferidos e foram aceitos.
+
+**Continuam sem nenhuma ocorrência:** título vazio, longo ou promocional; descrição vazia ou com HTML quebrado (a fonte nova manda texto simples); preço zero ou moeda ≠ BRL; promoção ≥ preço cheio, vencida ou com desconto >70%; imagem ausente; link sem https ou fora do domínio; pré-venda sem data; custom labels fora do padrão; produtos em rascunho no feed.
 
 ---
 
@@ -134,55 +164,48 @@ Mesmo critério das rodadas anteriores: gravidade × cliques e impressões, com 
 
 | # | Produto | Estoque | Cliques 30d | Impr. 30d | Status | Principais problemas |
 |---|---|---|---:|---:|---|---|
-| 1 | Raquete de Tênis Wilson Ultra 100 V5 Roland Garros – Limited Edition | sim | 110 | 16.290 | CRÍTICO | Página indisponível |
-| 2 | Óculos De Sol Mormaii Smash Vini Font – Camaleão | sim | 52 | 2.816 | CRÍTICO | Página indisponível |
-| 3 | Top Nike Pro Swoosh Feminino – Vermelho | sim | 11 | 625 | CRÍTICO | Página indisponível; sem cor |
-| 4 | Raqueteira Wilson Heritage 12PK – Off White/Marrom | sim | 14 | 2.455 | CRÍTICO | Página indisponível |
-| 5 | Shorts Nike Dri-FIT Tempo Feminino – Preto | sim | 54 | 2.363 | ALTO | Sem cor; imagem pequena; sem marca; identifierExists=false |
-| 6 | Bola De Tênis Wilson Roland Garros All Court – C/3 Tubos (9 Bolas) | sim | 8 | 3.025 | CRÍTICO | Página indisponível |
-| 7 | Shorts Lacoste Esportivos Ultra Dry Masculino – Preto, 2GG | sim | 73 | 2.424 | ALTO | Sem cor; sem marca; identifierExists=false |
-| 8 | Raquete de Beach Tennis AMA Athena Boreal Limited 2026, 326g / 26.8b | sim | 487 | 29.200 | ALTO | Sem marca; identifierExists=false |
-| 9 | Raqueteira Yonex Gearlogic 2026 Dupla Bege – 9 Raquetes | sim | 8 | 1.215 | CRÍTICO | Página indisponível |
-| 10 | Raquete de Beach Tennis AMA New Kronos 2026 6th Generation, 321g | sim | 329 | 28.829 | ALTO | Sem marca; identifierExists=false |
-| 11 | Shorts Adidas Essential Três Listras Masculino – Preto, M | sim | 9 | 508 | CRÍTICO | Página indisponível |
-| 12 | Tênis Fila Master Ace Clay/Saibro Masculino – Branco/Marinho, 39 | sim | 26 | 2.583 | ALTO | Sem cor; sem marca; identifierExists=false |
-| 13 | Raquete de Beach Tennis AMA Athena Boreal Limited 2026, 322g / 25.0b | sim | 180 | 10.989 | ALTO | Sem marca; identifierExists=false |
-| 14 | Regata Nike Court Feminina – Vermelha | sim | 4 | 204 | CRÍTICO | Página indisponível; sem cor |
-| 15 | Raquete de Beach Tennis AMA Athena Boreal Limited 2026, 322g / 26.2b | sim | 94 | 8.491 | ALTO | Sem marca; identifierExists=false |
-| 16 | Tênis On Running The Roger Pro Fire Clay Masculino – Verde, 44 | sim | 186 | 13.612 | ALTO | Sem marca; identifierExists=false; categoria antiga ("187" como código) |
-| 17 | Boné Nike Court Heritage Unissex – Preto, P/M | sim | 12 | 1.678 | ALTO | Sem cor; sem marca; identifierExists=false |
-| 18 | Top Nike Swoosh Futura – Preto | sim | 22 | 1.121 | ALTO | Sem cor; sem marca; identifierExists=false |
-| 19 | Saco de Bola de Beach Tennis Ama Sport com 60 Unidades | sim | 113 | 6.633 | ALTO | Sem marca; identifierExists=false |
-| 20 | Corda Solinco Hyper G 16L 1.30mm Verde – Set Individual | sim | 57 | 3.683 | ALTO | Sem marca; identifierExists=false |
+| 1 | Raquete de Tênis Wilson Ultra 100 V5 Roland Garros - Limited Edition | sim | 96 | 13.485 | CRÍTICO | Página indisponível |
+| 2 | Óculos De Sol Mormaii Smash Vini Font - Camaleão | sim | 45 | 2.506 | CRÍTICO | Página indisponível; sem cor |
+| 3 | Raqueteira Wilson Heritage 12PK - Off White/Marrom | sim | 11 | 2.120 | CRÍTICO | Página indisponível |
+| 4 | Bola De Tênis Wilson Roland Garros All Court - C/3 Tubos (9 Bolas) | sim | 6 | 2.680 | CRÍTICO | Página indisponível |
+| 5 | Raqueteira Yonex Gearlogic 2026 Dupla Bege - 9 Raquetes | sim | 8 | 1.215 | CRÍTICO | Página indisponível |
+| 6 | Top Nike Pro Swoosh Feminino - Vermelho | sim | 10 | 610 | CRÍTICO | Página indisponível |
+| 7 | Shorts Adidas Essential Três Listras Masculino - Preto M | sim | 9 | 472 | CRÍTICO | Página indisponível |
+| 8 | Raquete de Beach Tennis Mormaii Vitória Marchezini 2026, 326,3g / 26b | sim | 513 | 22.445 | ALTO | Categoria incompatível (3906); GTIN repetido |
+| 9 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 39 | sim | 116 | 5.534 | ALTO | Sem cor; categoria incompatível (1065) |
+| 10 | Tênis On Running The Roger Pro Fire Clay Masculino - Verde, 44 | sim | 161 | 11.775 | ALTO | Sem marca; identifierExists=false |
+| 11 | Regata Nike Court Feminina - Vermelha | sim | 4 | 204 | CRÍTICO | Página indisponível |
+| 12 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 38 | sim | 18 | 1.930 | ALTO | Sem cor; categoria incompatível (1065) |
+| 13 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 37 | sim | 16 | 1.690 | ALTO | Sem cor; categoria incompatível (1065) |
+| 14 | Boné On Running Lightweight Kids - Verde | sim | 20 | 3.390 | ALTO | Sem gênero; sem faixa etária |
+| 15 | Short Saia Adidas Com Short - Preto, G | sim | 5 | 381 | ALTO | Sem cor; sem marca; identifierExists=false |
+| 16 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 36 | sim | 12 | 1.306 | ALTO | Sem cor; categoria incompatível (1065) |
+| 17 | Boné Unissex On Running Lightweight - Cinza | sim | 16 | 2.813 | ALTO | Sem gênero; sem faixa etária |
+| 18 | Raquete de Beach Tennis Heroes Starlight Ruby - 2026 324g / 25b | sim | 418 | 30.852 | ALTO | Categoria incompatível (499848) |
+| 19 | Tênis On Running The Roger Pro 3 Clay João Fonseca Feminino - Roxo | sim | 8 | 5.493 | ALTO | Sem cor; GTIN repetido |
+| 20 | Boné On Running Lightweight Kids - Lilás | sim | 17 | 1.409 | ALTO | Sem gênero; sem faixa etária |
 
-Fora de estoque e com muitos cliques (vale repor): são 60 produtos, que somam 1.325 cliques em 30 dias. Os maiores estão em `resumo-por-produto.csv`.
+Fora de estoque e com muitos cliques (vale repor): são 61 produtos, que somam 1.175 cliques em 30 dias. Os maiores estão em `resumo-por-produto.csv`.
 
 ---
 
 ## 5. Plano de correção (atualizado)
 
-> **Regra geral:** corrija na **Shopify** e sincronize pelo **app de feed**, que foi o que funcionou hoje. Não use a fonte suplementar da CLI para correções permanentes.
+> **Regra geral:** corrija na **Shopify** e sincronize pelo **app de feed**. Não use a fonte suplementar da CLI para correções permanentes.
 
-1. **Página indisponível (10, Search Console + Merchant Center).** Teste ao vivo e peça nova análise. Todos estão ativos na Shopify. A Wilson Ultra 100 V5 RG sozinha tem 16 mil impressões por mês.
-2. **Marca e código de barras (Shopify + app). É agora o maior grupo de problemas de gravidade alta.**
-   - Os 164 produtos sem marca são os mesmos que vão como "sem identificador".
-   - Preencha o Fornecedor e o EAN na Shopify.
-   - Sincronize **Brand** pelo app.
-   - Tire esses produtos da regra "identifier exists = no".
-   - Corrija as 2 marcas trocadas, o EAN inválido e os 33 produtos com EAN repetido.
-3. **Cor (418) e tamanho (7), Shopify + app.** Preencha "Cor" e "Tamanho" na categoria do produto ou como opção da variante e sincronize **Color** e **Size** pelo mesmo botão de metacampos. Nas meias, o tamanho está só no título.
-4. **Categorias que sobraram (25 variantes, app).** Abra no app um dos produtos listados no §3, limpe ou corrija a categoria manual e sincronize. Prioridade: a Raquete Mormaii Vitória Marchezini.
-5. **Imagens (Shopify).** Troque a imagem do Top Nike Pro Dri-Fit Preto, que está reprovado, e as 80 imagens com aviso. Associe a foto certa a cada cor nos 23 grupos.
-6. **Gênero e idade nos 7 restantes (Shopify + app).** "Masculino" nos shorts Totality Cinza G e GG e no Nike Legend Essential 2, e "Faixa etária = Kids" nas bolas e na raqueteira infantis.
-7. **Promoção 84205 (Merchant Center + Shopify).** Crie o desconto de 10% no checkout ou encerre a promoção.
-8. **Frete (Merchant Center).** Confirme se o frete é mesmo grátis abaixo de R$ 399; hoje a tabela é R$ 0 nas duas faixas. Confira também se os pesos padrão de 300 g, 400 g e 800 g refletem os produtos.
-9. **Estoque e conteúdo (Shopify).**
-   - Repor os esgotados com procura e arquivar os descontinuados.
-   - Imagens adicionais (502).
-   - Descrições curtas (54) e títulos curtos (43).
-   - Datas de fim nas 27 promoções.
-   - Tipo da Bola DHS.
-10. **Acompanhamento.** Ligar as conversões e criar custom labels para segmentar campanhas.
+1. **Decidir a fonte única dos produtos.** Hoje o Google recebe 1.081 produtos do app oficial da Shopify (Shopify App API) e 253 do Simprosys. Se a ideia é trocar de fonte, confirme que o Simprosys foi desligado ou limitado para não competir com a nova; se não foi proposital, desative o app novo. Defina qual atributo cada fonte controla, para não voltar a perder campos como `itemGroupId`, `identifierExists` e a janela de promoção.
+2. **Página indisponível (9, Search Console + Merchant Center).** Teste ao vivo e peça nova análise. Todos estão ativos na Shopify. A Wilson Ultra 100 V5 RG tem 13 mil impressões por mês.
+3. **Anúncios locais grátis (Merchant Center).** Desative o programa para os 1.081 avisos "Missing local inventory data" deixarem de aparecer.
+4. **Gênero e faixa etária (app + Shopify).** As 14 ofertas femininas enviadas como masculino estão com o "Gênero-alvo" certo na Shopify; confira a regra de gênero no app (e retire a tag Masculino da Camiseta Adidas Feminina). Preencha gênero e faixa etária dos bonés On Running Lightweight, da testeira Lacoste e das meias Adidas. Corrija também a faixa etária dos 5 produtos infantis.
+5. **Categorias (Shopify).** As 16 variantes com o código 1065 (Asics Gel Resolution, Nike Vapor Lite 3 e On Roger Advantage Pro Feminino) precisam do código 187. A Raquete Mormaii Vitória Marchezini e a Heroes Starlight Ruby precisam do 499850. A Wilson Blade V10 X9 precisa do 3638. Preencha a categoria das 3 ofertas AMA Supreme sem categoria.
+6. **Cor (211) e tamanho (19), Shopify + app.** Preencha a cor das roupas e calçados que continuam sem ela e o tamanho das camisetas Lacoste, das meias e da Saia Adidas Plissada Infantil.
+7. **Marca e código de barras (Shopify + app).** Faltam marca em 28 produtos, mais 27 com identifierExists=false e 155 sem GTIN nem MPN. Preencha o EAN ou o SKU do fabricante (MPN). Corrija os 58 EAN repetidos e as 2 marcas trocadas.
+8. **Preço promocional (Shopify + app).** O app novo não envia data de fim para as 202 ofertas em promoção. Confira se isso é aceitável ou se há como enviar a data pela Shopify.
+9. **Imagens (Shopify).** Troque a imagem do Top Nike Pro Dri-Fit Preto, que está reprovado, e as 79 imagens com aviso. Associe a foto da cor certa a cada variante nos 15 grupos.
+10. **Promoção 84205 (Merchant Center + Shopify).** Crie o desconto de 10% no checkout ou encerre a promoção.
+11. **Frete (Merchant Center).** Confirme se o frete é mesmo grátis abaixo de R$ 399; hoje a tabela mostra R$ 0 nas duas faixas. Confira também se os pesos padrão (300 g, 400 g, 800 g) refletem os produtos.
+12. **Estoque e conteúdo (Shopify).** Repor os esgotados com procura e arquivar os descontinuados. Imagens adicionais (116), descrições curtas (56) e títulos curtos (45).
+13. **Acompanhamento.** Ligar as conversões e criar custom labels para segmentar campanhas.
 
 ---
 
@@ -190,15 +213,15 @@ Fora de estoque e com muitos cliques (vale repor): são 60 produtos, que somam 1
 
 | Arquivo | Conteúdo |
 |---|---|
-| `produtos.json` | JSON completo dos 1.332 produtos (`merchant.api.all_products()`) |
+| `produtos.json` | JSON completo dos 1.334 produtos (`merchant.api.all_products()`) |
 | `saude.csv` / `desempenho.csv` / `precos.csv` | `mc.py health`, `performance --dias 30` e `prices` |
 | `irregularidades.csv` | Uma linha por problema |
-| `resumo-por-produto.csv` | Uma linha por produto, com gravidade, status e urgência |
-| `shopify-verificacao.json` | Status na Shopify dos 10 produtos com "página indisponível" (só leitura, 23/10 14h30) |
-| `shopify-rascunhos.txt` | IDs dos 221 produtos em rascunho na Shopify (só leitura, 23/10 14h30) |
-| `auditar.py` | Gera os CSVs a partir dos arquivos acima |
+| `resumo-por-produto.csv` | Uma linha por produto, com gravidade, status e urgência (sem os avisos informativos; a coluna `avisos_informativos` mostra quantos foram deixados de fora) |
+| `shopify-verificacao.json` | Status na Shopify dos 9 produtos com "página indisponível" (só leitura, 26/10) |
+| `shopify-rascunhos.txt` | IDs dos 224 produtos em rascunho na Shopify (só leitura, 26/10) |
+| `auditar.py` | Gera os CSVs a partir dos arquivos acima. Novidades desta rodada: aceita categorias em código numérico (mapa de códigos por tipo), trata o destino de anúncios locais como aviso informativo e normaliza o `itemGroupId` da fonte nova |
 
 **Limites:**
 - O site tenez.com.br não é acessível deste ambiente, então os links foram conferidos pela API da Shopify.
-- Os IDs numéricos de categoria não foram validados contra a taxonomia do Google.
-- Os pesos de envio foram aceitos como informados; não há como saber se são os reais.
+- Os códigos de categoria foram conferidos pelas categorias da Shopify e pelos nomes em português; não consegui baixar a taxonomia oficial do Google.
+- Os pesos de envio foram aceitos como informados.

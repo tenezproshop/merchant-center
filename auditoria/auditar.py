@@ -130,6 +130,28 @@ for t in ("Overgrips", "Cushion Grip"):
 ESPERADA["Antivibradores"] = ([f"{ESP_TENIS} > Acessórios para raquetes de tênis"], f"{ESP_TENIS} > Acessórios para raquetes de tênis")
 ESPERADA["Toalhas"] = (["Casa e jardim > Lençóis e roupas de cama > Toalhas"], "Casa e jardim > Lençóis e roupas de cama > Toalhas")
 
+# Códigos numéricos da taxonomia do Google aceitos por tipo de produto. Os códigos foram lidos dos próprios
+# produtos (categoria da Shopify mapeada para o código pelo app) e conferidos com os nomes das categorias.
+_ROUPA_ESP = {5322, 166}
+NUM_OK = {
+    **{t: {187} for t in SAPATOS},
+    **{t: _ROUPA_ESP for t in ("Camisetas", "Shorts", "Regatas", "Tops", "Leggings", "Bermudas", "Calças", "Jaquetas")},
+    "Camisas Polo": {212, 5322, 166}, "Saias": {1581, 5344}, "Vestidos": {2271}, "Meias": {209}, "Sungas": {211},
+    "Bonés": {173}, "Viseiras": {173}, "Óculos de Sol": {178}, "Munhequeiras": {1893},
+    "Bandanas e Faixas de Cabelo": {1662}, "Toalhas": {4126, 4077},
+    **{t: {3906} for t in ("Raquetes de Tênis para Performance", "Raquetes de Tênis Infantil e Júnior",
+                           "Raquetes de Tênis Intermediário")},
+    **{t: {499850} for t in ("Raquetes de Beach Tennis", "Raquete de Beach Tennis")},
+    **{t: {3638} for t in ("Raqueteiras para 12 raquetes", "Raqueteiras para 9 raquetes", "Raqueteiras para 6 raquetes",
+                           "Raqueteiras para 3 raquetes", "Raqueteiras Infantis", "Raqueteira Tênis")},
+    "Mochilas": {3638, 3032}, "Mochila": {3638, 3032}, "Bolsas Esportivas": {3032, 3638},
+    "Raqueteiras e Mochilas de Beach Tennis": {499904, 3638, 3032},
+    **{t: {3113} for t in ("Bolas de Tênis - Caixa", "Bolas de Tênis - Infantil", "Bolas de Tênis - Pack Econômico",
+                           "Bolas de Tênis - Tubo Individual", "Bolas de Beach Tennis", "Bolas para Autógrafo")},
+    "Cordas Set Individual": {3922}, "Cordas Rolo": {3922}, "Overgrips": {3403}, "Cushion Grip": {3403},
+    "Antivibradores": {3352}, "Chaveiros": {3515}, "Rebatedores": {1065},
+}
+
 MARCAS_CONHECIDAS = ["nike", "adidas", "on running", "asics", "fila", "wilson", "yonex", "lacoste", "babolat", "head",
                      "mormaii", "k-swiss", "le coq", "tecnifibre", "dunlop", "inni", "shark", "luxilon", "genesis",
                      "solinco", "kona", "nox", "heroe", "ama", "tourna", "joma", "penn", "quicksand", "prokennex",
@@ -229,8 +251,11 @@ def main():
             reprov = sorted(i.get("reportingContext") for i in iss if i.get("severity") == "DISAPPROVED")
             rebaix = sorted(i.get("reportingContext") for i in iss if i.get("severity") == "DEMOTED")
             outros = sorted(i.get("reportingContext") for i in iss if i.get("severity") not in ("DISAPPROVED", "DEMOTED"))
-            if reprov:
+            reprov_online = [c for c in reprov if c != "FREE_LOCAL_LISTINGS"]
+            if reprov_online:
                 grav = "crítico"
+            elif reprov:
+                grav = "baixo"  # reprovado só em anúncios locais grátis (a loja não tem estoque físico)
             elif rebaix or code == "image_too_small_for_high_resolution":
                 grav = "alto"
             else:
@@ -434,8 +459,8 @@ def main():
                     "Confirmar que o produto realmente não tem EAN; se tiver, cadastrar.", "Shopify")
         elif not gtins:
             if not a.get("mpn"):
-                add(p, "pente-fino", "identificadores", "alto", "gtin/mpn", "",
-                    "Sem GTIN e sem MPN (e identifierExists não informado)",
+                add(p, "pente-fino", "identificadores", "médio", "gtin/mpn", "",
+                    "Sem GTIN e sem MPN (e identifierExists não informado); o Google ainda não acusou",
                     "Cadastrar o EAN (código de barras) ou o SKU do fabricante como MPN.", "Shopify")
             else:
                 add(p, "pente-fino", "identificadores", "médio", "gtin", f"mpn={a.get('mpn')}",
@@ -521,9 +546,17 @@ def main():
                 f"Definir a categoria do produto na Shopify (sugestão: {ESPERADA.get(ptype, ('', 'categoria específica'))[1]}).", "Shopify")
         else:
             if gpc.isdigit():
-                add(p, "pente-fino", "categoria", "baixo", "googleProductCategory", gpc,
-                    "Categoria enviada como ID numérico (formato aceito, mas difere do resto do catálogo; conferir se o ID corresponde ao tipo)",
-                    f"Conferir o ID na taxonomia do Google; sugestão: {ESPERADA.get(ptype, ('', 'categoria específica'))[1]}.", "Shopify")
+                if ptype in NUM_OK:
+                    if int(gpc) not in NUM_OK[ptype]:
+                        add(p, "pente-fino", "categoria", "alto", "googleProductCategory", gpc,
+                            f"Categoria (código {gpc}) incompatível com o tipo '{ptype}'",
+                            f"Usar o código {' ou '.join(str(x) for x in sorted(NUM_OK[ptype]))} "
+                            f"({ESPERADA.get(ptype, ('', 'categoria do tipo'))[1]}). Corrigir o campo de categoria do Google "
+                            "na Shopify e, se o app mantiver uma categoria manual, limpá-la lá.", "Shopify")
+                else:
+                    add(p, "pente-fino", "categoria", "baixo", "googleProductCategory", gpc,
+                        "Categoria enviada como código numérico sem regra de conferência para este tipo",
+                        f"Conferir o código na taxonomia do Google; sugestão: {ESPERADA.get(ptype, ('', 'categoria específica'))[1]}.", "Shopify")
             elif not gpc.startswith(("Vestuário", "Artigos", "Artes", "Saúde", "Câmeras", "Brinquedos", "Malas", "Casa")):
                 add(p, "pente-fino", "categoria", "médio", "googleProductCategory", gpc,
                     "Categoria do Google em outro idioma (inglês/polonês) num feed em português",
@@ -543,13 +576,17 @@ def main():
         if not a.get("productTypes"):
             add(p, "pente-fino", "categoria", "médio", "productTypes", "", "Sem tipo de produto", "Preencher 'Tipo' na Shopify.", "Shopify")
         if not a.get("condition"):
-            add(p, "pente-fino", "categoria", "médio", "condition", "", "Condição ausente", "Enviar condition=new.", "Simprosys")
+            add(p, "pente-fino", "categoria", "baixo", "condition", "", "Condição não enviada (o Google assume produto novo)",
+                "Opcional: enviar condition=new no app de feed.", "Simprosys")
 
         e_roupa, e_sapato, e_acess = ptype in ROUPAS, ptype in SAPATOS, ptype in ACESS_VEST
         if e_roupa or e_sapato or e_acess:
             if not a.get("color"):
                 add(p, "pente-fino", "atributos", "alto", "color", "", "Vestuário/calçado sem cor (obrigatório no Brasil)",
                     "Criar a opção 'Cor' na variante ou o metacampo de cor da categoria; mapear no Simprosys.", "Shopify")
+            if a.get("size") and re.fullmatch(r"[a-z]+(-[a-z]+)+", a["size"]):
+                add(p, "pente-fino", "atributos", "baixo", "size", a["size"], f"Tamanho enviado em formato de código ('{a['size']}')",
+                    "Trocar por 'Único' na opção da variante.", "Shopify")
             if (e_roupa or e_sapato) and not a.get("size"):
                 add(p, "pente-fino", "atributos", "alto", "size", "", "Vestuário/calçado sem tamanho (obrigatório no Brasil)",
                     "Cadastrar a opção 'Tamanho' (mesmo que 'Único').", "Shopify")
@@ -594,7 +631,7 @@ def main():
         grp = a.get("itemGroupId")
         if grp:
             membros = por_grupo[grp]
-            if grp != sid and sid:
+            if grp.removeprefix("shopify_ZZ_") != sid and sid:
                 add(p, "pente-fino", "variantes", "médio", "itemGroupId", grp, f"itemGroupId diferente do ID do produto Shopify ({sid})",
                     "Conferir agrupamento.", "Simprosys")
             igt = a.get("itemGroupTitle")
@@ -645,10 +682,13 @@ def main():
     for p in produtos:
         a, st = p["productAttributes"], p.get("productStatus", {})
         pid = p["name"].split("/")[-1]
-        ls = por_prod.get(pid, [])
+        ls_todos = por_prod.get(pid, [])
+        # Avisos informativos (estoque local e condição não enviada) ficam nos CSVs, mas não entram na contagem nem no status.
+        ls = [l for l in ls_todos if l["categoria"] != "google:local_stores_lack_inventory" and l["campo"] != "condition"]
         c = Counter(l["gravidade"] for l in ls)
         perf = desempenho.get(p["offerId"], {})
-        reprov = sorted(d["reportingContext"] for d in st.get("destinationStatuses", []) if d.get("disapprovedCountries"))
+        reprov_todos = sorted(d["reportingContext"] for d in st.get("destinationStatuses", []) if d.get("disapprovedCountries"))
+        reprov = [c for c in reprov_todos if c != "FREE_LOCAL_LISTINGS"]
         pend = sorted(d["reportingContext"] for d in st.get("destinationStatuses", []) if d.get("pendingCountries"))
         rebaix = sorted({i.get("reportingContext") for i in st.get("itemLevelIssues", []) if i.get("severity") == "DEMOTED"})
         if c["crítico"]:
@@ -669,8 +709,8 @@ def main():
             "product_id": pid, "offer_id": p["offerId"], "shopify_product_id": shopify_id(p), "titulo": a.get("title", ""),
             "tipo": (a.get("productTypes") or [""])[0], "marca": a.get("brand", ""), "disponibilidade": a.get("availability", ""),
             "preco": money(a.get("price")), "preco_promocional": money(a.get("salePrice")),
-            "critico": c["crítico"], "alto": c["alto"], "medio": c["médio"], "baixo": c["baixo"], "total_problemas": len(ls),
-            "status_geral": status, "reprovado_em": ", ".join(reprov), "rebaixado_em": ", ".join(rebaix),
+            "critico": c["crítico"], "alto": c["alto"], "medio": c["médio"], "baixo": c["baixo"], "total_problemas": len(ls), "avisos_informativos": len(ls_todos) - len(ls),
+            "status_geral": status, "reprovado_em": ", ".join(reprov), "reprovado_anuncios_locais": "sim" if "FREE_LOCAL_LISTINGS" in reprov_todos else "", "rebaixado_em": ", ".join(rebaix),
             "pendente_em": ", ".join(pend),
             "impressoes_30d": int(perf.get("impressoes", 0)), "cliques_30d": int(perf.get("cliques", 0)),
             "conversoes_30d": perf.get("conversoes", 0), "receita_30d": perf.get("receita", 0),
@@ -688,6 +728,10 @@ def main():
 
 
 COMO_GOOGLE = {
+    "local_stores_lack_inventory": ("O destino 'anúncios locais grátis' exige dados de estoque de loja física. Como a venda é só "
+                                    "online, o produto fica reprovado só nesse destino; Shopping e anúncios grátis online não "
+                                    "são afetados. Desativar o programa de anúncios locais gratuitos no Merchant Center, "
+                                    "ou ignorar o aviso.", "Merchant Center"),
     "landing_page_error": ("com o mesmo handle do link — a página existe. Provável falha de "
                            "rastreamento do Googlebot (bloqueio por app de proteção/antibot, lentidão, redirecionamento por "
                            "país/moeda). Testar a URL na Inspeção de URL do Search Console (teste ao vivo) e, estando OK, "
