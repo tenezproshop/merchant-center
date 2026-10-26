@@ -175,11 +175,11 @@ Mesmo critério das rodadas anteriores: gravidade × cliques e impressões, com 
 | 9 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 39 | sim | 116 | 5.534 | ALTO | Sem cor; categoria incompatível (1065) |
 | 10 | Tênis On Running The Roger Pro Fire Clay Masculino - Verde, 44 | sim | 161 | 11.775 | ALTO | Sem marca; identifierExists=false |
 | 11 | Regata Nike Court Feminina - Vermelha | sim | 4 | 204 | CRÍTICO | Página indisponível |
-| 12 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 38 | sim | 18 | 1.930 | ALTO | Sem cor; categoria incompatível (1065) |
+| 12 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 36 | sim | 18 | 1.930 | ALTO | Sem cor; categoria incompatível (1065) |
 | 13 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 37 | sim | 16 | 1.690 | ALTO | Sem cor; categoria incompatível (1065) |
 | 14 | Boné On Running Lightweight Kids - Verde | sim | 20 | 3.390 | ALTO | Sem gênero; sem faixa etária |
 | 15 | Short Saia Adidas Com Short - Preto, G | sim | 5 | 381 | ALTO | Sem cor; sem marca; identifierExists=false |
-| 16 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 36 | sim | 12 | 1.306 | ALTO | Sem cor; categoria incompatível (1065) |
+| 16 | Tênis Asics Gel Resolution x Clay / Saibro Feminino - Preto/Rosa 35 | sim | 12 | 1.306 | ALTO | Sem cor; categoria incompatível (1065) |
 | 17 | Boné Unissex On Running Lightweight - Cinza | sim | 16 | 2.813 | ALTO | Sem gênero; sem faixa etária |
 | 18 | Raquete de Beach Tennis Heroes Starlight Ruby - 2026 324g / 25b | sim | 418 | 30.852 | ALTO | Categoria incompatível (499848) |
 | 19 | Tênis On Running The Roger Pro 3 Clay João Fonseca Feminino - Roxo | sim | 8 | 5.493 | ALTO | Sem cor; GTIN repetido |
