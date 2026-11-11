@@ -670,9 +670,10 @@ def main():
                 continue
             ok = v in LABELS_PADRAO or (n not in (0, 1, 2))
             if not ok or v != v.strip() or v.lower() != v or v in ("teste", "test"):
-                add(p, "pente-fino", "custom-labels", "médio", f"customLabel{n}", v, "Rótulo personalizado fora do padrão",
-                    "Usar só os valores do padrão (mais-vendidos, normal, sem-exposicao, margem-*, liquidacao, em-promocao, preco-cheio).",
-                    "Merchant Center")
+                add(p, "pente-fino", "custom-labels", "baixo", f"customLabel{n}", v, "Rótulo personalizado fora do padrão",
+                    "Informativo: desde 27/10 a Simprosys envia a própria segmentação (customLabel0 desempenho, 1 estoque, 2 faixa de ticket, "
+                    "3 preço cheio/oferta). Confirmar que é intencional; não afeta aprovação.",
+                    "Simprosys")
 
     # Resumo por produto -----------------------------------------------------------------------
     por_prod = defaultdict(list)
